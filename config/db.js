@@ -1,8 +1,12 @@
 // config the connection to mongo db
 
 const mongoose = require("mongoose")
+// env variables
+require('dotenv').config()
 
-const dbURI = 'mongodb+srv://Baptiste:<password>@cluster0.zf3t6.mongodb.net/<dbname>?retryWrites=true&w=majority'
+const dbURI = process.env.ATLAS_URI
+
+mongoose.connect(dbURI,{useNewUrlParser:true, useCreateIndex:true})
 
 const InitiateMongoServer = async() => {
     try {
