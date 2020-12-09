@@ -6,7 +6,7 @@ require('dotenv').config()
 
 const dbURI = process.env.ATLAS_URI
 
-mongoose.connect(dbURI,{useNewUrlParser:true, useCreateIndex:true})
+mongoose.connect(dbURI,{useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true})
 
 const InitiateMongoServer = async() => {
     try {
