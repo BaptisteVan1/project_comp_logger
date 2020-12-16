@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 // env variables
 require('dotenv').config()
 
-const dbURI = process.env.ATLAS_URI
+const dbURI = process.env.ATLAS_URI //check DB name here!!!
 
 mongoose.connect(dbURI,{useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true})
 
