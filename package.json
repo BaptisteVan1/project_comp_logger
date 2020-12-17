@@ -17,6 +17,8 @@
     "express-validator": "^6.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.4"
+    "mongoose": "^5.11.4",
+    "save": "^2.4.0",
+    "validator": "^13.5.2"
   }
 }
