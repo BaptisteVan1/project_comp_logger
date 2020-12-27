@@ -28,6 +28,19 @@ userSchema.pre('save', async function(next){
     next()
 })
 
+// static method to login user
+userSchema.statics.login = async function(email, password) {
+    const user = await this .findOne({email: email})
+    if (user) {
+        const auth = await bcrypt.compare(password, user.password)
+        if (auth) {
+            return user
+        }
+        throw Error('incorrect password')
+    }
+    throw Error('incorrect email')
+}
+
 
 // creating model, name NEEDS to be singular of the db name
 const User = mongoose.model('user', userSchema)
