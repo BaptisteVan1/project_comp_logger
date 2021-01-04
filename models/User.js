@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 })
 
 
-// fire a function before doc saved to db
+// fire a function before doc saved to db to encrypt password
 userSchema.pre('save', async function(next){
     const salt = await bcrypt.genSalt()
     // this = instance of the user we're creating
@@ -40,6 +40,8 @@ userSchema.statics.login = async function(email, password) {
     }
     throw Error('incorrect email')
 }
+// we check if the user email and password exist in the db. If yes we will send a tocken in cookies,
+// if not we will send error message and render them in front
 
 
 // creating model, name NEEDS to be singular of the db name

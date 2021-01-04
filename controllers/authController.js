@@ -37,24 +37,30 @@ const handleErrors = (err) => {
     return errors;
   }
 
-  // value of 3 days in seconds
+// value of 3 days in seconds
 const maxAge = 3*24*60*60
 
+
+// creating a token that will be used to check if user is logged in
 const createToken = (id) => {
     //secret to be changedand stored somewhere else. NOT SAFE
-    return jwt.sign({id}, 'my secret', {
+    return jwt.sign({id}, process.env.SECRET, {
         expiresIn: maxAge
     })
 }
 
+// rendering the signup page
 module.exports.signup_get = (req, res) => {
     res.render('signup')
 }
 
+
+// rendering the login page
 module.exports.login_get = (req, res) => {
     res.render('login')
 }
 
+// managing the signup process (catching posted data and processing it)
 module.exports.signup_post = async (req, res) => {
     const { email, password } = req.body
     // creating new user in DB
@@ -69,6 +75,8 @@ module.exports.signup_post = async (req, res) => {
         res.status(400).json({errors})
     }
 }
+// once user is created, a token will be created as well, with a lifespan of 3 days, 
+//that will be sent as cookie for later verification
 
 module.exports.login_post =  async(req, res) => {
     const { email, password } = req.body
@@ -82,3 +90,12 @@ module.exports.login_post =  async(req, res) => {
         res.status(400).json({errors})
     }
 }
+// this serves to create and send a token in a cookie after the login
+
+
+module.exports.logout_get = (req, res) => {
+    res.cookie('jwt', '', {maxAge: 1})
+    res.redirect('/') 
+}
+// here we replace the login token by another one with a lifespan of 1 milisecond that is empty and then redirect to home
+// as token is replaced then deleted, user is logged out because server can't read it's token with matching secret

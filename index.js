@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const InitiateMongoServer = require('./config/db')
 const authRoutes = require('./routes/authRoutes')
 const cookieParser = require('cookie-parser')
+const {requireAuth, checkUser} = require('./middleware/authMiddleware')
 
 const app = express()
 
@@ -21,6 +22,8 @@ app.set('view engine', 'ejs')
 InitiateMongoServer()
 
 // routes
+// I want to check user on every route so I use *
+app.get('*', checkUser)
 app.get('/', (req, res) => res.render('home'))
-app.get('/comps', (req, res) => res.render('comp'))
+app.get('/comps', requireAuth, (req, res) => res.render('comp'))
 app.use(authRoutes)
