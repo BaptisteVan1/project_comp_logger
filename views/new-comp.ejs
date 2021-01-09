@@ -1,0 +1,31 @@
+<%- include('partials/header'); -%>
+
+<form action="/">
+  <h2>Register a competition</h2>
+  <label for="name">Competition Name</label>
+  <input type="text" name="name" required />
+  <div class="name error"></div>
+  <label for="city">City</label>
+  <input type="text" name="city" required />
+  <div class="city error"></div>
+  <label for="country">Country</label>
+  <input type="text" name="country" required />
+  <div class="country error"></div>
+  <label for="price">Price</label>
+  <input type="number" name="price" required />
+  <div class="price error"></div>
+  <label for="currency">Currency</label>
+  <input type="text" name="currency" required />
+  <div class="currency error"></div>
+  <label for="date">Competition Date</label>
+  <input type="date" name="date" required />
+  <div class="date error"></div>
+  <button>Register the competition</button>
+</form>
+
+<%- include('partials/footer'); -%>
+
+<script>
+  // here I will connect the form that is above to the
+  // controller that will deal with posting to the DB
+</script>
