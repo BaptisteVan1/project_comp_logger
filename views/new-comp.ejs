@@ -1,6 +1,6 @@
 <%- include('partials/header'); -%>
 
-<form action="/">
+<form action="/new-comp">
   <h2>Register a competition</h2>
   <label for="name">Competition Name</label>
   <input type="text" name="name" required />
@@ -26,6 +26,54 @@
 <%- include('partials/footer'); -%>
 
 <script>
-  // here I will connect the form that is above to the
-  // controller that will deal with posting to the DB
+  // storing data from the form
+  const form = document.querySelector('form')
+  //storing below the different errors
+  const nameError = document.querySelector('.name.error')
+  const cityError = document.querySelector('.city.error')
+  const countryError = document.querySelector('.country.error')
+  const priceError = document.querySelector('.price.error')
+  const currencyError = document.querySelector('.currency.error')
+  const dateError = document.querySelector('.date.error')
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    //reset errors
+    nameError.textContent = ''
+    cityError.textContent = ''
+    countryError.textContent = ''
+    priceError.textContent = ''
+    currencyError.textContent = ''
+    dateError.textContent = ''
+    // get values
+    const name = form.name.value
+    const city = form.city.value
+    const country = form.country.value
+    const price = form.price.value
+    const currency = form.currency.value
+    const date = form.date.value
+    try{
+      // will have to add a page with confirmation message
+      // so user knows it succeded
+      const res = await fetch('/new-comp', {
+        method: 'POST',
+        body: JSON.stringify({name, city, country, price, currency, date}),
+        headers: {'Content-Type': 'application/json'}
+        })
+      const data= await res.json()
+      console.log(res.json)
+      console.log(data)
+      if (data.errors) {
+        nameError.textContent= data.errors.name
+        cityError.textContent = data.errors.city
+        countryError.textContent = data.errors.country
+        priceError.textContent = data.errors.price
+        currencyError.textContent = data.errors.currency
+        dateError.textContent = data.errors.date
+      }
+    }catch (err) {
+      console.log(err)
+    }
+
+  })
 </script>

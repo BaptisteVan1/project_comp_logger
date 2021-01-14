@@ -7,7 +7,9 @@ module.exports.newcomp_get = (req, res) => {
 }
 
 // managing the comp save process
-module.exports.newcomp_get_post = async (req, res) => {
+// need to implement a redirect upont submit
+// need to manage errors
+module.exports.newcomp_post = async (req, res) => {
     const {name, city, country, price, currency, date} = req.body
     //creating a new comp in DB
     try{
