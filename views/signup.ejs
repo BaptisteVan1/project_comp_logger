@@ -39,7 +39,8 @@
         passwordError.textContent = data.errors.password
       }
       if (data.user) {
-        location.assign('/') //this is to redirect upon signing up
+        location.assign('/')
+        //this is to redirect upon signing up
       }
     }
     catch (err) {

@@ -43,7 +43,6 @@ const maxAge = 3*24*60*60
 
 // creating a token that will be used to check if user is logged in
 const createToken = (id) => {
-    //secret to be changedand stored somewhere else. NOT SAFE
     return jwt.sign({id}, process.env.SECRET, {
         expiresIn: maxAge
     })
