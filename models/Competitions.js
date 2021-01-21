@@ -32,6 +32,8 @@ const compSchema = new mongoose.Schema({
     }
 })
 
+
+
 const Competition = mongoose.model('competition', compSchema)
 
 module.exports = Competition

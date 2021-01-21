@@ -14,8 +14,8 @@
 <%- include('partials/footer'); -%>
 
 <script>
-//NEED TO CHECK AGAIN WHERE THE ERRORS ARE TRANSFERED FROM BACK TO FRONT END - tuto YT netninja node auth ep.12 (11?)
   const form = document.querySelector('form')
+  //grabing the respective divs where the error will appear
   const emailError = document.querySelector('.email.error')
   const passwordError = document.querySelector('.password.error')
   form.addEventListener('submit', async (e) => {
@@ -35,6 +35,7 @@
       const data = await res.json()
       console.log(data)
       if (data.errors) {
+        //pasing the errors content to the div
         emailError.textContent = data.errors.email
         passwordError.textContent = data.errors.password
       }

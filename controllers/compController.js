@@ -4,19 +4,24 @@ const Competition = require("../models/Competitions")
 const handleCompErrors = (err) => {
     console.log(err.message, err.code)
     let errors = {
-        name:'',
-        city:'',
-        country:'',
-        price:'',
-        currency:'',
-        date:'',
+        name:''
     }
 
     // duplicate error
-    if (err.code ===11000) {
-        error.name = 'that competition is already registered'
+    if (err.code === 11000) {
+        errors.name = 'That competition is already registered'
         return errors
     }
+    
+
+    // validation errors
+    if(err.message.includes('')) {
+        Object.values(err.errors).forEach(({properties}) =>{
+            errors[properties.path] = properties.message
+        })
+    }
+
+    return errors
 }
 
 
@@ -26,7 +31,6 @@ module.exports.newcomp_get = (req, res) => {
 }
 
 // managing the comp save process
-// need to implement a redirect upont submit
 // need to manage errors
 module.exports.newcomp_post = async (req, res) => {
     const {name, city, country, price, currency, date} = req.body
@@ -39,8 +43,7 @@ module.exports.newcomp_post = async (req, res) => {
         console.log('New competition added')
         console.log(nComp)
     }catch(err){
-        // const errors = handleErrors(Err)
-        // res.status(400).json(errors)
-        console.log(err)
+        const compErrors = handleCompErrors(err)
+        res.status(400).json({compErrors})
     }
 }

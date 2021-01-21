@@ -29,12 +29,11 @@
   // storing data from the form
   const form = document.querySelector('form')
   //storing below the different errors 
-  // (working on 1 a ta time)
   const nameError = document.querySelector('.name.error')
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault()
-    //reset errors (1 at a time)
+    //reset errors
     nameError.textContent = ''
     // get values
     const name = form.name.value
@@ -54,12 +53,7 @@
       const data= await res.json()
       console.log(data)
       if (data.errors) {
-        nameError.textContent= data.errors.name
-        cityError.textContent = data.errors.city
-        countryError.textContent = data.errors.country
-        priceError.textContent = data.errors.price
-        currencyError.textContent = data.errors.currency
-        dateError.textContent = data.errors.date
+        nameError.textContent = data.errors.name
       }if (data.nComp){
         location.assign('/comp')
       }

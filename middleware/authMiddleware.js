@@ -6,6 +6,7 @@ const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt
 
     //check if tocken exists and is valid
+    //change secret here HUGE SAFETY GAP
     if(token){
         jwt.verify(token, 'my secret', (err, decodedToken) =>{
             if(err){

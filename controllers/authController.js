@@ -14,7 +14,7 @@ const handleErrors = (err) => {
 
     // incorrect password
     if (err.message === 'incorrect password'){
-        errors.password = 'that password is not registered'
+        errors.password = 'that password is not correct'
         return errors
     }
 
@@ -31,10 +31,10 @@ const handleErrors = (err) => {
         // console.log(val);
         // console.log(properties);
         errors[properties.path] = properties.message;
-      });
+      })
     }
   
-    return errors;
+    return errors
   }
 
 // value of 3 days in seconds
