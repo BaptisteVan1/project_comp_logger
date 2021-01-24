@@ -8,7 +8,7 @@ const requireAuth = (req, res, next) => {
     //check if tocken exists and is valid
     //change secret here HUGE SAFETY GAP
     if(token){
-        jwt.verify(token, 'my secret', (err, decodedToken) =>{
+        jwt.verify(token, process.env.SECRET, (err, decodedToken) =>{
             if(err){
                 console.log(err.message)
                 res.redirect('/login')
@@ -27,7 +27,7 @@ const checkUser = (req, res, next) => {
     const token = req.cookies.jwt
     // verifying if token exists
     if(token){
-        jwt.verify(token, 'my secret', async (err, decodedToken) =>{
+        jwt.verify(token, process.env.SECRET, async (err, decodedToken) =>{
             if(err){
                 console.log(err.message)
                 // to avoid having a server side error

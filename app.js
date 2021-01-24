@@ -6,6 +6,7 @@ const compRoutes = require('./routes/compRoutes')
 const compDisplayRoutes = require('./routes/compDisplayRoutes')
 const cookieParser = require('cookie-parser')
 const {requireAuth, checkUser} = require('./middleware/authMiddleware')
+const helmet = require('helmet')
 
 const app = express()
 
@@ -13,6 +14,8 @@ const app = express()
 app.use(express.static('public'))
 app.use(express.json())
 app.use(cookieParser())
+// middleware for XSS -> check the rest later
+app.use(helmet.xssFilter())
 
 // port
 app.listen(5000, () => console.log('App listening on port 5000'))

@@ -1,7 +1,19 @@
 <%- include('partials/header') -%>
 <h1>Competitions list</h1>
 <ul>
+    <% if (competitions) { %>
+    <% competitions.forEach(competition => {%>
     <li>
+        <%= competition.name %>:
+        <ul>
+            <li>Place: <%= competition.city %>, <%= competition.country %></li>
+            <li>Price: <%= competition.price %> <%= competition.currency %></li>
+            <li>Date: <%= competition.date %></li>
+        </ul>
     </li>
+    <% }) %>
+    <% } else { %>
+    <li> No competitions to display</li>
+    <% } %>
 </ul>
 <%- include('partials/footer') -%>

@@ -5,11 +5,9 @@ const Competition = require('../models/Competitions')
 module.exports.comp_display_get = (req, res) =>{
     Competition.find()
         .then(result => {
-            console.log(result)
-            res.render('comp')
+            res.render('comp', {competitions: result})
         })
         .catch(err => {
             console.log(err)
         })
-    // res.render('comp')
 }
